@@ -4,6 +4,7 @@ import { loginComponent } from "./Controllers/UserController.js";
 import { RegisterComponent } from "./Controllers/UserController.js";
 import { getMenu, createMenu,updateMenu,deleteMenu} from "./Controllers/MenuController.js";
 import { uploads } from "./Models/upload.js";
+import { verifyToken } from "./Authentication/AuthMiddleware.js";
 const app = express();
 app.use(express.json());
 
@@ -28,10 +29,10 @@ app.post('/api/auth/register',RegisterComponent);
 
 //MenuController
 app.get('/api/menu',getMenu);
-app.post('/api/menu',uploads.single("image"),createMenu);
+app.post('/api/menu',verifyToken,uploads.single("image"),createMenu);
 app.get('/api/menu/:id', getMenu);
-app.put('/api/menu/:id',updateMenu);
-// app.delete('/api/menu/:id',deleteMenu)
+app.put('/api/menu/:id',verifyToken,updateMenu);
+app.delete('/api/menu/:id',verifyToken,deleteMenu)
 
 
 const port = process.env.PORT || 4000;
