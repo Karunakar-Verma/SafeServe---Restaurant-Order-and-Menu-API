@@ -1,5 +1,6 @@
-import sequelize from "../Db/db";
+import sequelize from "../Db/db.js";
 import { DataTypes } from "sequelize";
+
 
 const Menu  = sequelize.define('Menu',{
     id:{

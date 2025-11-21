@@ -3,8 +3,11 @@ import sequelize from "./Db/db.js";
 import { loginComponent } from "./Controllers/UserController.js";
 import { RegisterComponent } from "./Controllers/UserController.js";
 import { getMenu, createMenu,updateMenu,deleteMenu} from "./Controllers/MenuController.js";
+import { uploads } from "./Models/upload.js";
 const app = express();
 app.use(express.json());
+
+
 
 
 
@@ -25,10 +28,10 @@ app.post('/api/auth/register',RegisterComponent);
 
 //MenuController
 app.get('/api/menu',getMenu);
-app.post('/api/menu',createMenu);
+app.post('/api/menu',uploads.single("image"),createMenu);
 app.get('/api/menu/:id', getMenu);
 app.put('/api/menu/:id',updateMenu);
-app.delete('/api/menu/:id',deleteMenu)
+// app.delete('/api/menu/:id',deleteMenu)
 
 
 const port = process.env.PORT || 4000;
