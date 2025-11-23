@@ -34,6 +34,13 @@ app.get('/api/menu/:id', getMenu);
 app.put('/api/menu/:id',verifyToken,updateMenu);
 app.delete('/api/menu/:id',verifyToken,deleteMenu)
 
+import { createOrder,getOrder, updateOrderStatus,listOrders,deleteOrders} from "./Controllers/OrderController.js";
+//OrderController
+app.post('/api/orders',createOrder)
+app.get('/api/orders',listOrders)
+app.get('/api/orders/:id',getOrder)
+app.put('/api/orders/:id',updateOrderStatus)
+app.delete('/api/orders/:id',deleteOrders)
 
 const port = process.env.PORT || 4000;
 app.listen(port, ()=>{
